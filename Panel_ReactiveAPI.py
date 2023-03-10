@@ -28,24 +28,14 @@
 # 
 # - Makes the layout of the different components more explicit.
 
-# In[ ]:
-
 
 get_ipython().run_line_magic('matplotlib', 'inline')
 get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[ ]:
-
 
 # first import our usual libraries
 import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
-
-
-# In[ ]:
-
 
 # Now import panel with an alias pn
 import panel as pn
@@ -58,16 +48,10 @@ from panel import widgets
 pn.extension()
 
 
-# In[ ]:
-
-
 # Read the dataset
 auto = pd.read_excel("AutoMPG.xlsx")
 
 auto
-
-
-# In[ ]:
 
 
 # The typical 3-line code for matplotlib scatterplot
@@ -81,15 +65,8 @@ myPlot = myFig.add_subplot(1,1,1)
 # Using pandas plot method and ax attribute create a scatter plot of Wt X HP
 auto.plot.scatter('Weight', 'Horsepower', color='blue', s=10**2, alpha=0.1, ax=myPlot)
 
-
-# In[ ]:
-
-
 # Let's explore what columns exists in our dataset
 auto.columns 
-
-
-# In[ ]:
 
 
 # First explicity declare the widget elements for various parameters that our plotting function uses
@@ -109,10 +86,6 @@ uC = pn.widgets.ColorPicker(name='C', value='#654321')
 # IntSlider widget for size
 uS = pn.widgets.IntSlider(name='S', start=1, end=20, value=5)
 
-
-# In[ ]:
-
-
 # Function declaration with pn.depends decorator to link widgets to the function. 
 
 @pn.depends(uX, uY, uC, uS)
@@ -131,18 +104,9 @@ def react_mpl_plot(uXVar, uYVar, uColor, uSize):
     # return the figure container so that it can be used by the API functions
     return rFig
    
-
-
-# In[ ]:
-
-
 from bokeh.resources import INLINE
 import bokeh.io
 bokeh.io.output_notebook(INLINE) 
-
-
-# In[ ]:
-
 
 # finally lay out the widgets and the react_mpl_plot function explicitly.
 
@@ -157,9 +121,6 @@ pn.Row(pn.Column(uX,uY,uC,uS),react_mpl_plot).show("This is the interactive pane
 
 # #### In this example, we will size the marks by variable "Weight", rest of the function code otherwise remains unchanged
 
-# In[ ]:
-
-
 # First declare the widget elements for various parameters that our plotting function uses -- as before
 
 # Select dropdown widgets each for x and y axis variable selection
@@ -170,9 +131,6 @@ uY = pn.widgets.Select(name='Y', options=['Cylinder', 'Displacement', 'Horsepowe
 uC = pn.widgets.ColorPicker(name='C', value='#654321')
 
 # Notice in this case we are not declaring the size widget as we had in the previous case
-
-
-# In[ ]:
 
 
 # Function declaration with pn.depends decorator to link widgets to the function -- changes to the marker size option
@@ -193,11 +151,8 @@ def react_mpl_plot_weight(uXVar, uYVar, uColor):
     
     # return the figure container so that it can be used by the API functions
     return rFig
-
-
-# In[ ]:
-
-
+  
+  
 # finally lay out the widgets and the react_mpl_plot_weight function explicitly.
 # pn.Row(pn.Column(uX,uY,uC), react_mpl_plot_weight).servable()
 pn.Row(pn.Column(uX,uY,uC), react_mpl_plot_weight).show("Using markers sized by car weight")
@@ -210,8 +165,6 @@ pn.Row(pn.Column(uX,uY,uC), react_mpl_plot_weight).show("Using markers sized by 
 # - See all the widget possibilities here: https://panel.holoviz.org/user_guide/Widgets.html
 
 # ### Steps to get you started.... 
-
-# In[ ]:
 
 
 # What are the values in the origin column?
@@ -226,16 +179,11 @@ sorted(auto.Origin.unique())
 # 
 # checkbutton_group
 
-# In[ ]:
-
-
 uCntry = pn.widgets.CheckButtonGroup(name="Auto Country of Origin",
                                   value=[1], # Values already pre-selected
                                   options=[1,2,3]) # All the possible values
 uCntry
 
-
-# In[ ]:
 
 
 ### Prepare the dataset to show only countries selected in the check box
@@ -243,18 +191,9 @@ uCntry
 
 
 
-# In[ ]:
-
-
 # Now write the code for the function -- 
 # start with @pn.depends(nameOfYourWidgetVariable) followed by def functionName on the next line  
 
 @pn.depends ....
 
-
-# In[ ]:
-
-
 # Now layout all the widgets and function calls using .show() or .servable() methods
-
-
