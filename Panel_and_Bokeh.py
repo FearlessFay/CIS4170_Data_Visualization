@@ -3,15 +3,8 @@
 
 # # Adding bokeh plots to Panel based visualizations
 
-# In[ ]:
-
-
 get_ipython().run_line_magic('matplotlib', 'inline')
 get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[ ]:
-
 
 # importing libraries
 import matplotlib.pyplot as plt
@@ -21,16 +14,10 @@ import pandas as pd
 import pandas_bokeh
 
 
-# In[ ]:
-
-
 # Loading bokeh inline
 from bokeh.resources import INLINE
 import bokeh.io
 bokeh.io.output_notebook(INLINE) 
-
-
-# In[ ]:
 
 
 # Now import panel with an alias pn
@@ -39,9 +26,6 @@ import panel as pn
 # In the classic Jupyter notebook environment, first make sure to load the pn.extension(). 
 # Panel objects will then render themselves if they are the last item in a notebook cell.
 pn.extension()
-
-
-# In[ ]:
 
 
 # Read the dataset.. This is a slightly updated dataset with two new columns of Origin_Country and Weight_Size
@@ -55,9 +39,6 @@ auto
 
 # # Declare the widgets explicitly
 # - Since we will be using Panel's reactive programming API.
-
-# In[ ]:
-
 
 # We will use reactive programming API for agthering our plots from differnt libraries
 # First explicity declare the widget elements for various parameters that our plotting function uses
@@ -92,8 +73,6 @@ uY2 = pn.widgets.Select(name='Y2-Axis Variable Selection',
 # 
 # - Important Note: **All columns in a ColumnDataSource have the same length i.e. same number of elements**. Therefore, all sequences of values that you pass to a single ColumnDataSource must have the same length as well. If you try to pass sequences of different lengths, Bokeh will not be able to create your ColumnDataSource.
 
-# In[ ]:
-
 
 # Set of import statements needed for bokeh
 # you need to import the modules as needed from various bokeh interfaces such as .plotting, .layouts, etc. 
@@ -110,9 +89,6 @@ from bokeh.models import ColumnDataSource
 from bokeh.transform import factor_cmap, factor_mark
 
 
-# In[ ]:
-
-
 # A simple example of creating ColumnDataSource - from a dictionary
 
 myData = {'x_values': [1, 2, 3, 4, 5],
@@ -123,10 +99,6 @@ myCDS = ColumnDataSource(data=myData)
 
 print(myDF)
 print(myCDS.data)
-
-
-# In[ ]:
-
 
 #To add a new **column** to an existing ColumnDataSource:
 
@@ -144,9 +116,6 @@ print(myCDS.data)
 # 
 # - See more on CDS here: https://docs.bokeh.org/en/latest/docs/user_guide/data.html#providing-data-as-a-columndatasource
 
-# In[ ]:
-
-
 # Creating a CDS from auto dataframe
 
 autoCDS = ColumnDataSource(auto)
@@ -157,9 +126,6 @@ autoCDS.data
 # - [Different interactive tool options](https://docs.bokeh.org/en/latest/docs/user_guide/tools.html)
 # - [Detailed guide on styling with visual attributes](https://docs.bokeh.org/en/latest/docs/user_guide/styling.html)
 # - [Changing colors and marker types based on categorical columns](https://docs.bokeh.org/en/latest/docs/user_guide/data.html#mapping-marker-types)
-
-# In[ ]:
-
 
 @pn.depends(uX, uY, uY2)
 def bokeh_plot(uXVar, uYVar, uYVar2):
@@ -237,8 +203,6 @@ def bokeh_plot(uXVar, uYVar, uYVar2):
 
 # # Create the scatter plot using matplotlib
 
-# In[ ]:
-
 
 # Function declaration with pn.depends decorator to link widgets to the function. 
 @pn.depends(uX, uY)
@@ -275,9 +239,6 @@ def react_mpl_plot_weight(uXVar, uYVar):
 
 # # Create the scatter plot using pandasBokeh
 
-# In[ ]:
-
-
 # Function declaration with pn.depends decorator to link widgets to the function. 
 @pn.depends(uX, uY)
 def react_pandasBokeh_plot_weight(uXVar, uYVar):
@@ -307,15 +268,10 @@ def react_pandasBokeh_plot_weight(uXVar, uYVar):
 
 # ### Putting together these plots together with pn.Tabs, pn.Row, and pn.Column
 
-# In[ ]:
-
 
 # Let's add a title and organize the widgets 
 title = pn.Row("** Auto MPG Explorer **",  margin=20, background='#f0f0f0')
 xyWid = pn.Row(uX, uY, uY2, margin=20, background='#f0f0f0')
-
-
-# In[ ]:
 
 
 tab1 = pn.Row(react_mpl_plot_weight, pn.Column(pn.Spacer(height=30),react_pandasBokeh_plot_weight))
@@ -323,16 +279,8 @@ tab2 = pn.Column(bokeh_plot)
 tabs = pn.Tabs(("MPL/pandasBokeh", tab1), ("Bokeh linked brushing demo", tab2))
 #pn.Column(pn.Row(title, xyWid, height=100), tabs)
 
-
-# In[ ]:
-
-
 # Using .show() to start a Bokeh server instance from within your jupyter notebook for rapid prototyping
 # pn.Column(pn.Row(title, xyWid, height=100), tabs).show(title="Auto Analysis with .show")
-
-
-# In[ ]:
-
 
 # Using .servable() to turn a notebook into a deployable app
 pn.Column(pn.Row(title, xyWid, height=100), tabs).servable(title="Auto Bokeh: Tabs/linked brushing")
