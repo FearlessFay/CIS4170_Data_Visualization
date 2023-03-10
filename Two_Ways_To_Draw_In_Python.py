@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 get_ipython().run_line_magic('matplotlib', 'inline')
 get_ipython().run_line_magic('matplotlib', 'notebook')
 
@@ -48,4 +45,3 @@ myFig2 = plt.figure(figsize=(7,5))
 
 myPlot = myFig2.add_subplot(2,2,1)
 myPlot.scatter([1,2,3],[1,2,3],color='red')
-
