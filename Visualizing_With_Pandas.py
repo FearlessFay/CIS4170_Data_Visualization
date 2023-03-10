@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Visualizing with pandas
-
-# In[20]:
+# Visualizing with pandas
 
 
 # To display the output of plotting commands inline within frontends like the Jupyter notebook
@@ -13,17 +11,11 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 get_ipython().run_line_magic('matplotlib', 'notebook')
 
 
-# In[21]:
-
-
 # importing all the needed libraries
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn
-
-
-# In[22]:
 
 
 plotDF = pd.DataFrame(np.random.rand(15, 5).cumsum(0), # Create 15x5 dataframe of randomly generated numbers that are cumulatively added up
@@ -32,8 +24,6 @@ plotDF = pd.DataFrame(np.random.rand(15, 5).cumsum(0), # Create 15x5 dataframe o
 plotDF.index = plotDF.index.to_period('D')
 print(plotDF)
 
-
-# In[23]:
 
 
 # First create the subplots with matplotlib, and then plot on a specific subplot by specifying the 'ax' keyword
@@ -55,14 +45,7 @@ plotDF.AAPL.plot(kind='bar', ax=dfGrid[0,1])
 plotDF[['AAPL','BOA']].plot(kind='bar', ax=dfGrid[1,0])
 
 
-# In[ ]:
-
-
 #dfGrid[0,0].cla()
-
-
-# In[24]:
-
 
 # When plotting a single column
 #dfGrid[0,1].cla()
@@ -72,9 +55,6 @@ plotDF.BOA.plot(kind='barh', ax=dfGrid[1,1])
 # #### In-class Practice exercises
 # 1. In the last session, we created plots using all of the columns in the dataset (except for plot # 3). What if we wanted to create a plot using only some of the columns?
 
-# In[ ]:
-
-
 # Line chart in top right
 plotDF.plot(kind='line', ax=dfGrid[0,1])
 
@@ -83,10 +63,6 @@ plotDF.AAPL.plot(kind='hist', ax=dfGrid[1,0])
 
 # Horizontal stacked bar chart in bottom right
 plotDF.plot(kind='barh', stacked=True, ax=dfGrid[1,1])
-
-
-# In[ ]:
-
 
 # When plotting two or more columns
 dfGrid[0,0].cla()
@@ -109,15 +85,8 @@ plotDF[['AAPL','DEC']].plot(kind='barh', ax=dfGrid[0,0])
 # 2. pd.crosstab()
 # 3. pd.pivot_table()
 
-# In[15]:
-
-
 tipsDF = pd.read_excel("tips.xlsx")
 tipsDF
-
-
-# In[26]:
-
 
 # Create the figure and subplots 
 tipFig, tipGrid = plt.subplots(2,2, figsize=(10,6))
@@ -130,17 +99,10 @@ tipFig.suptitle("Analyzing tips dataset", fontsize=15)
 tipFig.subplots_adjust(wspace=.5, hspace=.5)
 
 
-
-# In[27]:
-
-
 # 1. Number of parties by day
 dayCnt = pd.crosstab(tipsDF.day, tipsDF.time)
 print(dayCnt)
 dayCnt.plot.barh(ax=tipGrid[0,0], title="Number of parties by day")
-
-
-# In[ ]:
 
 
 # 2. How many parties were categorized as smoking vs. non-smoking diners? Create a bar chart to show this visually
@@ -156,16 +118,11 @@ smokeDT = {'title':"# of smoking parties by day",
 tipGrid[0,1].set(**smokeDT)
 
 
-# In[ ]:
-
 
 # 3. Create an histogram with 10 bins for Tip% 
 # First, calculate the % of tip that was paid as part of the total bill and add that as a column to your existing DF
 tipsDF['tipPCT'] = tipsDF['tip']/tipsDF['total_bill'] * 100
 tipsDF
-
-
-# In[ ]:
 
 
 # Now Plot the histogram and set the gridlines to false
@@ -176,9 +133,6 @@ tipGrid[1,0].grid(False)
 tipsDT = {'title':'Frequency of tipping %', 
           'xlabel':'Tip %'}
 tipGrid[1,0].set(**tipsDT)
-
-
-# In[ ]:
 
 
 # 4. # of parties by the size of the party
@@ -195,8 +149,6 @@ tipGrid[1,1].legend(loc="upper left", ncol=len(day.columns),fontsize=7)
 # - plt.cla(): To clear a subplot 
 # - plt.clf(): To clear an entire figure (Careful as this will clear and remove all the subplots too)
 
-# In[ ]:
-
 
 # Clearing plot space
 
@@ -205,4 +157,3 @@ tipGrid[1,0].cla()
 
 #plt.clf(): To clear an entire figure (Careful as this will clear and remove all the subplots too)
 #tipFig.clf()
-
