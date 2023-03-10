@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Basic static visualization with matplotlib (McKinney Ch 9)
+# Basic static visualization with matplotlib (McKinney Ch 9)
 # https://learning.oreilly.com/library/view/python-for-data/9781491957653/ch09.html#vis
 # 
 # - For creating static graphics for print or web, it is easier and quicker to use matplotlib and add-on libraries like pandas and seaborn. 
@@ -13,20 +10,12 @@
 # - For other data visualization requirements such as interactive web-based visualizations, among several alternatives it may be useful to learn 
 #     - Bokeh and/or 
 #     - Plotly
-#     
-
-# In[ ]:
-
 
 # To display the output of plotting commands inline within frontends like the Jupyter notebook
 get_ipython().run_line_magic('matplotlib', 'inline')
 
 # To add some basic interaction such as pan and zoom to the matplotlib charts
 get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[ ]:
-
 
 # importing all the needed libraries
 import matplotlib.pyplot as plt
@@ -60,9 +49,6 @@ import seaborn
 
 # ### Creating a line plot
 
-# In[ ]:
-
-
 # Creating a simple line plot using .plot() method. 	Plot y versus x as lines and/or markers.
 # plt.clf()                                                #--- to clear the plotting space 
 plt.figure(figsize=(9,7))                                 #--- You need to set the figure size before you plot.
@@ -77,9 +63,6 @@ plt.plot(np.random.randn(10), np.random.randn(10),         # x and y values gene
 # plt.plot([3,4,1,2,8,6,7,8,9,10]) and redraw the original s1 plt.plot(s1)
 # or plt.subplots_adjust()
 
-# In[ ]:
-
-
 # Let's plot another line with following values for Y
 plt.plot([3,4,1,2,8,6,7,8,9,10], 'g--')
 
@@ -87,9 +70,6 @@ plt.plot([3,4,1,2,8,6,7,8,9,10], 'g--')
 # ### Creating a bar chart
 # - Method to use are .bar() and.barh()
 # - For detailed parameter list see: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html
-
-# In[ ]:
-
 
 plt.barh(['Sweden','ROC','Netherlands'],[3,7,5], height =.5)
 plt.title('Winter Olympics Total Medal Count')
@@ -102,9 +82,6 @@ plt.title('Winter Olympics Total Medal Count')
 # - Method to use .hist()
 # - For detailed paramater list see: https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.hist.html#matplotlib.pyplot.hist
 
-# In[ ]:
-
-
 plt.hist(np.random.random(50), bins=10, color='blue')
 # Since we used plt.plot() method, all the plots are being created in the same plot container above
 
@@ -112,8 +89,6 @@ plt.hist(np.random.random(50), bins=10, color='blue')
 # ### Creating a scatter plot
 # - Method to use .scatter()
 # - For detailed paramater list see: https://matplotlib.org/3.1.0/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter
-
-# In[ ]:
 
 
 plt.scatter([3,4,1,2,8,6,7,8,9,10], [3,4,1,2,8,6,7,8,9,10], color='red')
@@ -123,8 +98,6 @@ plt.scatter([3,4,1,2,8,6,7,8,9,10], [3,4,1,2,8,6,7,8,9,10], color='red')
 # ### Creating a pie chart
 # - Method to use is .pie()
 # - For detailed paramater list see: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pie.html
-
-# In[ ]:
 
 
 # Use .clf() to clear the plot area
@@ -147,23 +120,12 @@ plt.pie([3,7,5,4],labels=['Sweden','ROC','Netherlands','China'], autopct='%.2f')
 # 
 # 
 
-# In[ ]:
-
-
 # Create a figure object -- better way to create a named container unlike .plot()
 myFig = plt.figure(figsize=(7, 5))
-
-
-# In[ ]:
-
 
 # Create subplots using add_subplot() method and following will create 1x1 grid
 myPlot = myFig.add_subplot(2,2,2)
 myPlot.bar(['Apple', 'Banana','Cherry','Dragon fruit'], [10,8,5 ,12], width=0.5)
-
-
-# In[ ]:
-
 
 # Create the figure object -- better way to create a named container unlike .plot()
 myFig2 = plt.figure(figsize=(9,9))
@@ -180,10 +142,6 @@ myPlot2.scatter([4,1,9,5], [10,8,5,12], color='red')
 myPlot3 = myFig2.add_subplot(2,2,1)
 myPlot3.bar(['apple','banana'], [5,9], width=.5)
 
-
-# In[ ]:
-
-
 # Create a figure object -- better way to create a named container unlike .plot()
 myFig1 = plt.figure(figsize=(10, 7))
 
@@ -196,18 +154,11 @@ myPlot2 = myFig1.add_subplot(2,2,2)
 myPlot3 = myFig1.add_subplot(2,2,3)
 myPlot4 = myFig1.add_subplot(2,2,4)
 
-
-# In[ ]:
-
-
 # Add a scatter plot in first position with two different colored markers
 myPlot1.scatter([1,2,3], [6,7,8], color='blue', label='Blue')
 myPlot1.scatter([6,7,8], [1,4,8], color='green', label='Grn')
 myPlot1.set_title("Scatter colors")
 myPlot1.legend(loc='best')
-
-
-# In[ ]:
 
 
 # Add line chart in the 2nd position
@@ -217,17 +168,11 @@ myPlot2.set_title("Line Styles")
 myPlot2.legend(loc='best')
 
 
-# In[ ]:
-
-
 # Ass plots in the 3rd and 4th position
 myPlot3.pie([6,1,8,2], labels=['MSIS','MBA','MSBA','MSQMM'])
 myPlot4.bar(['MSIS','MBA','MSBA','MSQMM'],[6,1,8,2], width=0.5)
 myPlot3.set_title("Pie")
 myPlot4.set_title("Bar")
-
-
-# In[ ]:
 
 
 # You do not need to specify plots in each of the subplot area...
